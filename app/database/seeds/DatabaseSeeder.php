@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('SearchesTableSeeder');
 		$this->command->info('Searches table seeded.');
 
+		$this->call('SearchesSitesTableSeeder');
+		$this->command->info('Searches_Sites pivot table seeded.');
+
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 }
