@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder {
 		if ( ! $this->command->confirm('This will completely reset the DB info. Still wanna do it? [yes|NO]', false))
 		{
 			exit();
-	}
+		}
 
 		$this->call('UsersTableSeeder');
 		$this->command->info('Users table seeded.');
