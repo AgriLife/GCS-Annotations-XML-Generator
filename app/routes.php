@@ -16,6 +16,8 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::get('dashboard', array('before' => 'auth', 'uses' => 'HomeController@showDashboard'));
+
 // Confide RESTful route
 Route::get('user/confirm/{code}', 'UserController@getConfirm');
 Route::get('user/reset/{token}', 'UserController@getReset');
