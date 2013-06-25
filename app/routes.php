@@ -19,4 +19,4 @@ Route::get('/', function()
 // Confide RESTful route
 Route::get('user/confirm/{code}', 'UserController@getConfirm');
 Route::get('user/reset/{token}', 'UserController@getReset');
-Route::controller( 'user', 'UserController');
+Route::controller( 'user', 'UserController');Route::resource('sites', 'SitesController');

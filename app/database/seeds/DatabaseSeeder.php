@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('UsersTableSeeder');
 		$this->command->info('Users table seeded.');
 
+		$this->call('SitesTableSeeder');
+		$this->command->info('Sites table seeded.');
+
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 }
