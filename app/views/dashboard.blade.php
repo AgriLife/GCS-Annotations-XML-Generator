@@ -11,7 +11,7 @@
 	</div>
 	<div class="row">
 		<div class="large-12 columns">
-			<p><strong>API Key: </strong><pre>a8vrevh8n2oiunv9qwe8rgno2flai8v</pre></p>
+			<p><strong>API Key: </strong><pre>{{ Crypt::decrypt($user->api_key) }}</pre></p>
 			<p><a href="#" class="button">Regenerate</a></p>
 		</div>
 	</div>
