@@ -19,7 +19,9 @@ class CreateSitesTable extends Migration {
 			$table->string('url');
 			$table->string('comment')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
         });
     }
 

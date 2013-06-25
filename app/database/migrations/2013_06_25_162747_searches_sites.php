@@ -17,8 +17,12 @@ class SearchesSites extends Migration {
             $table->integer('search_id')->unsigned();
 			$table->integer('site_id')->unsigned();
             $table->timestamps();
-            $table->foreign('search_id')->references('id')->on('searches');
-            $table->foreign('site_id')->references('id')->on('sites');
+            $table->foreign('search_id')->references('id')->on('searches')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+            $table->foreign('site_id')->references('id')->on('sites')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
         });
     }
 

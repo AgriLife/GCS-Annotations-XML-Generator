@@ -18,7 +18,9 @@ class CreateSearchesTable extends Migration {
 			$table->string('name');
 			$table->string('label');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
         });
     }
 
