@@ -22,7 +22,8 @@ Route::get('dashboard', array('before' => 'auth', 'uses' => 'HomeController@show
 Route::get('user/confirm/{code}', 'UserController@getConfirm');
 Route::get('user/reset/{token}', 'UserController@getReset');
 Route::controller( 'user', 'UserController');
-
-Route::resource('sites', 'SitesController');
-
-Route::resource('searches', 'SearchesController');
+Route::group(array('prefix' => 'api/v1', 'before' => 'auth.basic'), function()
+{
+	Route::resource('sites', 'SitesController');
+	Route::resource('searches', 'SearchesController');
+});
