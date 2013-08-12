@@ -42,10 +42,29 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('auth.api', function()
+{
+	$api_key = Request::get('key');
+	if (empty($api_key)) {
+		return Response::json(array(
+			'error' => 'No API key provided'),
+			403
+		);
+	}
+	$encrypted_api_key = Crypt::encrypt($api_key);
+	$user = DB::table('users')->where('api_key', $encrypted_api_key)->first();
+	var_dump($user);
+	// if (Auth::login($user->id)) return;
+	// return Response::json(array(
+	// 	'error' => 'API key is incorrect'),
+	// 	403
+	// );
+});
+
 
 Route::filter('auth.basic', function()
 {
-	return Auth::basic();
+	return Auth::basic('username');
 });
 
 /*
