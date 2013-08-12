@@ -3,6 +3,11 @@
 @section('main')
 	<div class="row">
 		<div class="large-10 columns">
+			@if ( Session::get('notice') )
+				<div data-alert class="alert-box success">
+					{{ Session::get('notice') }}
+				</div>
+			@endif
 			<h2>Dashboard - {{ $user->email }}</h2>
 		</div>
 		<div class="large-2 columns">
