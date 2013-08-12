@@ -27,3 +27,5 @@ Route::group(array('prefix' => 'api/v1', 'before' => 'auth.basic'), function()
 	Route::resource('sites', 'SitesController');
 	Route::resource('searches', 'SearchesController');
 });
+
+Route::get('searches/{search_id}.xml', 'XmlController@show');
