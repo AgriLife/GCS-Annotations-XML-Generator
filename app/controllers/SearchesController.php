@@ -2,6 +2,12 @@
 
 class SearchesController extends BaseController {
 
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = Auth::user();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -9,7 +15,25 @@ class SearchesController extends BaseController {
      */
     public function index()
     {
-        //
+        $searches = $this->user->searches;
+        $error = false;
+
+        foreach ( $searches as $search )
+        {
+            $search->sites = $search->sites;
+        }
+
+        if ( empty( $searches ) ) {
+            $error = 'No searches found';
+        }
+
+        return Response::json(
+            array(
+                'error' => $error,
+                'searches' => $searches->toArray(),
+            ),
+            200
+        );
     }
 
     /**
@@ -29,7 +53,20 @@ class SearchesController extends BaseController {
      */
     public function store()
     {
-        //
+        $search = new Search;
+        $search->user_id = $this->user->id;
+        $search->name = Request::get('name');
+        $search->label = Request::get('label');
+
+        $search->save();
+
+        return Response::json(
+            array(
+                'error' => false,
+                'search' => $search->toArray(),
+            ),
+            200
+        );
     }
 
     /**
@@ -62,7 +99,27 @@ class SearchesController extends BaseController {
      */
     public function update($id)
     {
-        //
+        $search = Search::where('user_id', $this->user->id)->find($id);
+
+        if ( Request::get('name') )
+        {
+            $search->name = Request::get('name');
+        }
+
+        if ( Request::get('label') )
+        {
+            $search->label = Request::get('label');
+        }
+
+        $search->save();
+
+        return Response::json(
+            array(
+                'error' => false,
+                'message' => 'Search updated'
+            ),
+            200
+        );
     }
 
     /**
@@ -73,7 +130,19 @@ class SearchesController extends BaseController {
      */
     public function destroy($id)
     {
-        //
+        $search = Search::where('user_id', $this->user->id)->find($id);
+
+        $search->sites()->detach();
+        
+        $search->delete();
+
+        return Response::json(
+            array(
+                'error' => false,
+                'message' => 'Search deleted',
+            ),
+            200
+        );
     }
 
 }

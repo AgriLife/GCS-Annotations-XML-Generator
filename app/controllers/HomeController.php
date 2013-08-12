@@ -15,9 +15,9 @@ class HomeController extends BaseController {
 
 		$data['user'] = $this->user;
 
-		$data['searches'] = Search::where('user_id', $this->user->id)->get();
+		$data['searches'] = $this->user->searches;
 
-		$data['sites'] = Site::where('user_id', $this->user->id)->get();
+		$data['sites'] = $this->user->sites;
 
 		return View::make('dashboard', $data);
 	}
