@@ -31,6 +31,7 @@ class UserController extends BaseController {
         $user->username = Input::get( 'username' );
         $user->email = Input::get( 'email' );
         $user->password = Input::get( 'password' );
+        $user->api_key = Crypt::encrypt(Str::random(32));
 
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's
@@ -102,7 +103,7 @@ class UserController extends BaseController {
                 return Redirect::to($r);
             }
             
-            return Redirect::to('/'); // change it to '/admin', '/dashboard' or something
+            return Redirect::to('dashboard'); // change it to '/admin', '/dashboard' or something
         }
         else
         {
