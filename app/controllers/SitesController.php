@@ -69,6 +69,8 @@ class SitesController extends BaseController {
             $site->searches()->sync($search_ids);
         }
 
+        $site->searches = $site->searches;
+
         return Response::json(
             array(
                 'error' => false,
