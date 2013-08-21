@@ -77,7 +77,17 @@ class SearchesController extends BaseController {
      */
     public function show($id)
     {
-        //
+        $site = Search::where('user_id', $this->user->id)->find($id);
+
+        $site->sites = $site->sites;
+
+        return Response::json(
+            array(
+                'error' => false,
+                'site' => $site->toArray(),
+            ),
+            200
+        );
     }
 
     /**
