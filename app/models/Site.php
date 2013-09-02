@@ -1,6 +1,6 @@
 <?php
 
-class Site extends Eloquent {
+class Site extends Ardent {
     protected $guarded = array();
 
     public static $rules = array();
