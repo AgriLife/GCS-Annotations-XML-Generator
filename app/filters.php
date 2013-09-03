@@ -44,21 +44,17 @@ Route::filter('auth', function()
 
 Route::filter('auth.api', function()
 {
-	$api_key = Request::get('key');
-	// if (empty($api_key)) {
-	// 	return Response::json(array(
-	// 		'error' => 'No API key provided'),
-	// 		403
-	// 	);
-	// }
-	$return = Auth::attempt(array('username' => Request::get('user'), 'password' => Request::get('password')));
-	// return Response::json(array(
-	// 	'response' => $return));
-	// if (Auth::login($user->id)) return;
-	// return Response::json(array(
-	// 	'error' => 'API key is incorrect'),
-	// 	403
-	// );
+	$user = Request::get('user');
+	$password = Request::get('password');
+	if ( Auth::attempt(array('username' => $user, 'password' => $password) ) )
+	{
+		return;
+	} else {
+		return Response::json(array(
+			'error' => true,
+			'message' => 'Invalid credentials',
+		));
+	}
 });
 
 
